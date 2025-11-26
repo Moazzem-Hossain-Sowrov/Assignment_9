@@ -1,33 +1,45 @@
 import React, { useContext } from "react";
 import { Link } from "react-router";
 import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
-const Register =()=> {
-  const {RegisterWithEmailPassword} =useContext(AuthContext);
+const Register = () => {
+  const { RegisterWithEmailPassword, setUser,user } = useContext(AuthContext);
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
-    RegisterWithEmailPassword(email,pass)
-    .then(userCredential=>{
-      const user = userCredential.user
-      console.log(user);
-      
-    })
-    .catch(err=>{
+    const name = e.target.name.value;
+    const photoUrl = e.target.photoUrl.value;
 
-      
-    })
-    
+    RegisterWithEmailPassword(email, pass)
+      .then((userCredential) => {
+        updateProfile(auth.currentUser, {
+          displayName: name, photoURL: photoUrl
+        }).then(() => {
+          setUser(userCredential.user)
+          
+        }).catch((error) => {
 
+        })
+      })
+      .catch(err => {
+        
+
+
+      })
   }
 
-    return (
-      <div>
+  console.log(user);
+  
+
+  return (
+    <div>
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          
+
           <div className="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl">
             <div className="card-body">
               <form onSubmit={handleSubmit} className="fieldset">
@@ -43,7 +55,7 @@ const Register =()=> {
 
                 <div>
                   <span>Already have an account? </span><Link to='/login' className='text-blue-500'>Login</Link>
-                  </div>
+                </div>
                 <button className="btn btn-neutral mt-4">Register</button>
               </form>
             </div>
@@ -51,8 +63,8 @@ const Register =()=> {
         </div>
       </div>
     </div>
-    )
-  }
+  )
+}
 
 
 export default Register
