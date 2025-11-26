@@ -1,0 +1,64 @@
+import React from "react";
+
+const tips = [
+  {
+    id: 1,
+    title: "Keep Your Pet Warm",
+    description: "Use winter jackets, sweaters, and proper bedding to protect pets from cold drafts.",
+    icon: "❄️",
+  },
+  {
+    id: 2,
+    title: "Protect Their Paws",
+    description: "Snow, ice, and salt can damage paw pads. Use paw balms or protective boots.",
+    icon: "🐾",
+  },
+  {
+    id: 3,
+    title: "Avoid Overbathing",
+    description: "Reduce baths during winter to prevent skin dryness. Use moisturizing shampoos.",
+    icon: "🛁",
+  },
+  {
+    id: 4,
+    title: "Provide Proper Nutrition",
+    description: "Pets may need extra calories in winter to maintain body heat.",
+    icon: "🍗",
+  },
+];
+
+const WinterTips = () => {
+  return (
+    <div className="px-[120px] bg-base-200 mt-5">
+      <div>
+        <h2 className="font-bold text-4xl text-center p-6 text-blue-500">Winter Care Tips for Pets</h2>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 ">
+        {
+          tips.map((tip) => (
+             <div  key={tip.id} className="card w-auto bg-base-100 card-md shadow-sm">
+              <div className="card-body">
+               <div className="text-4xl mb-4">{tip.icon}</div>
+                <h2 className="card-title text-blue-800">{tip.title} </h2>
+                <p>{tip.description}</p>
+              </div>
+            </div>
+
+
+            
+              
+
+          
+
+
+
+
+          ))}
+
+      </div>
+    </div>
+  )
+}
+
+export default WinterTips;

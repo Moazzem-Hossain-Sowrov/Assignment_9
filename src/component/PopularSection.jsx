@@ -4,17 +4,17 @@ import React, { useEffect, useState } from "react";
 const PopularSection = () => {
 
 
-   const [Services, setServices] = useState ([]);
+   const [Services, setServices] = useState([]);
 
-   useEffect(()=>{
+   useEffect(() => {
       fetch('./services.json')
-      .then(res => res.json())
-      .then(data => setServices(data))
-      .catch(err =>console.log(err))
+         .then(res => res.json())
+         .then(data => setServices(data))
+         .catch(err => console.log(err))
 
-   },[])
+   }, [])
 
-   
+
 
    console.log(Services)
 
@@ -22,26 +22,34 @@ const PopularSection = () => {
 
 
    return (
-      <div className="mt-6 px-[150px]">
+      <div className="px-[120px]">
          <div>
             <h3 className="font-bold text-4xl text-center p-6">Popular Winter Care Service</h3>
          </div>
 
-         <div className="card bg-base-100 w-96 shadow-sm">
-            <figure>
-               <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes" />
-            </figure>
-            <div className="card-body">
-               <h2 className="card-title">Card Title</h2>
-               <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-               <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-               </div>
-            </div>
+         <div className="grid grid-cols-3 gap-3">
+            {
+               Services.map(service =>
+                  <div className="card bg-base-100 w-90 shadow-md">
+                     <figure>
+                        <img className="w-full h-[300px] object-cover"
+                           src={service?.image}
+                           alt="Shoes" />
+                     </figure>
+                     <div className="card-body">
+                        <h2 className="card-title">{service?.serviceName}</h2>
+                        <div className="flex justify-between">
+                           <p>Price: {service?.price}</p>
+                           <p>Rating: {service?.rating}</p>
+                        </div>
+                        <div className="card-actions justify-end">
+                           <button className="btn btn-primary">View Details</button>
+                        </div>
+                     </div>
+                  </div>
+               )
+            }
          </div>
-
       </div>
    );
 };
