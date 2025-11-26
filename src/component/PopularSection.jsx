@@ -27,9 +27,9 @@ const PopularSection = () => {
             <h3 className="font-bold text-4xl text-center p-6">Popular Winter Care Service</h3>
          </div>
 
-         <div className="grid grid-cols-3 gap-3">
+         <div className="grid grid-cols-3 gap-6">
             {
-               Services.map(service =>
+               Services.slice(0,6).map(service =>
                   <div className="card bg-base-100 w-90 shadow-md">
                      <figure>
                         <img className="w-full h-[300px] object-cover"
