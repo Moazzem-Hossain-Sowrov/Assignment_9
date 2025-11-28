@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
@@ -8,6 +8,8 @@ import { FcGoogle } from "react-icons/fc";
 const Register = () => {
   const { RegisterWithEmailPassword, setUser,user,handleGoogleSignin } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -15,13 +17,26 @@ const Register = () => {
     const name = e.target.name.value;
     const photoUrl = e.target.photoUrl.value;
 
+    const uppercase = /[A-Z]/;
+    const lowercase =/[a-z]/;
+
+    if(pass.length < 6) {
+      return alert("Less than 6 character")
+    }
+    if(!uppercase.test(pass)){
+      return alert("Need a Uppercase")
+    }
+    if(!lowercase.test(pass)){
+      return alert("Need a Lowercse")
+    }
+
     RegisterWithEmailPassword(email, pass)
       .then((userCredential) => {
         updateProfile(auth.currentUser, {
           displayName: name, photoURL: photoUrl
         }).then(() => {
           setUser(userCredential.user)
-          
+          navigate("/")
         }).catch((error) => {
 
         })
@@ -64,7 +79,6 @@ const Register = () => {
                 <label className="label">Password</label>
                 <input name="password" type="password" className="input" placeholder="Password" />
                 <button onClick={googleSignup} className="btn"><FcGoogle /></button>
-                <div><a className="link link-hover">Forgot password?</a></div>
 
                 <div>
                   <span>Already have an account? </span><Link to='/login' className='text-blue-500'>Login</Link>
