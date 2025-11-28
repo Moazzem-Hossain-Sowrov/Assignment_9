@@ -36,10 +36,11 @@ const Services = () => {
                   <p>Rating: {service?.rating}</p>
                 </div>
                 <div className="card-actions justify-end">
-                  <Link to={`/details/${service?.serviceId}`}><button  className="btn btn-primary">View Details</button></Link>
+                  <Link to={`/details/${service?.serviceId}`}><button className="btn btn-primary">View Details</button></Link>
                 </div>
               </div>
             </motion.div>
+            
           )
         }
       </div>

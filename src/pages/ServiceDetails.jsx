@@ -44,7 +44,7 @@ const ServiceDetails = () => {
           </p>
 
           <p className="text-lg font-semibold">
-            ⭐ {serviceDetails.rating}
+            <i class="fa-regular fa-star"></i> {serviceDetails.rating}
           </p>
         </div>
 

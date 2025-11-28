@@ -8,12 +8,15 @@ import Profile from "../pages/Profile";
 import PrivateRoute from "./privateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
 import ForgetPass from "../pages/ForgetPass";
+import Error from "../pages/Error";
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout/>,
+    errorElement:<Error></Error>,
     children:[
       {
         path:"/",
