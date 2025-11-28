@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const vets = [
   {
@@ -26,35 +27,49 @@ const vets = [
 
 
 const MeetOurVets = () => {
+
+const handleBooking = (vetName) => {
+    toast.success(`Booking for ${vetName} successful!`);
+  }
+
   return (
-    <div className="px-[120px]">
-      <div>
-        <h2 className="font-bold text-4xl text-center p-6 text-blue-500">Meet Our Expert Vets</h2>
+    <div className="px-[120px] sm:px-8 px-4"> 
+  <div>
+    <h2 className="font-bold text-4xl text-center p-6 text-blue-500">
+      Meet Our Expert Vets
+    </h2>
+  </div>
+
+  <div className="grid grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
+    {vets.map((vet) => (
+      <div key={vet.id} className="card bg-base-100 w-90 shadow-md w-full sm:w-full">
+        <figure>
+          <img
+            src={vet.image}
+            alt={vet.name}
+            className="w-full h-[300px] sm:h-64 object-cover" 
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title text-blue-500">{vet.name}</h2>
+          <div>
+            <p>{vet.specialty}</p>
+            <p>{vet.experience}</p>
+          </div>
+          <div className="card-actions justify-end">
+            <button
+              onClick={() => handleBooking(vet.name)}
+              className="btn btn-primary"
+            >
+              Book Appointment
+            </button>
+          </div>
+        </div>
       </div>
+    ))}
+  </div>
+</div>
 
-      <div className="grid grid-cols-3 gap-3">
-        {
-          vets.map((vet) => (
-            <div key={vet.id} className="card bg-base-100 w-90 shadow-md">
-              <figure>
-                <img src={vet.image} alt={vet.name}  className="w-full h-[300px] object-cover"/>
-
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-blue-500">{vet.name}</h2>
-                <div className="">
-                  <p>{vet.specialty}</p>
-                  <p>{vet.experience}</p>
-                </div>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Book Appointment</button>
-                </div>
-              </div>
-            </div>
-          ))}
-
-      </div>
-    </div>
   )
 }
 

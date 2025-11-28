@@ -29,35 +29,26 @@ const tips = [
 
 const WinterTips = () => {
   return (
-    <div className="px-[120px] bg-base-200 mt-5">
-      <div>
-        <h2 className="font-bold text-4xl text-center p-6 text-blue-500">Winter Care Tips for Pets</h2>
+    <div className="px-[120px] sm:px-6 px-4 bg-base-200 mt-5">
+  <div>
+    <h2 className="font-bold text-4xl sm:text-3xl text-2xl text-center p-6 text-blue-500">
+      Winter Care Tips for Pets
+    </h2>
+  </div>
+
+  <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+    {tips.map((tip) => (
+      <div key={tip.id} className="card w-auto sm:w-full bg-base-100 card-md shadow-sm">
+        <div className="card-body">
+          <div className="text-4xl mb-4">{tip.icon}</div>
+          <h2 className="card-title text-blue-800 text-xl sm:text-lg">{tip.title}</h2>
+          <p className="text-sm sm:text-xs">{tip.description}</p>
+        </div>
       </div>
+    ))}
+  </div>
+</div>
 
-      <div className="grid grid-cols-4 gap-4 ">
-        {
-          tips.map((tip) => (
-             <div  key={tip.id} className="card w-auto bg-base-100 card-md shadow-sm">
-              <div className="card-body">
-               <div className="text-4xl mb-4">{tip.icon}</div>
-                <h2 className="card-title text-blue-800">{tip.title} </h2>
-                <p>{tip.description}</p>
-              </div>
-            </div>
-
-
-            
-              
-
-          
-
-
-
-
-          ))}
-
-      </div>
-    </div>
   )
 }
 

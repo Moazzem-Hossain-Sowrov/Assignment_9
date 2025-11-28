@@ -4,6 +4,7 @@ import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { RegisterWithEmailPassword, setUser,user,handleGoogleSignin } = useContext(AuthContext);
@@ -21,13 +22,16 @@ const Register = () => {
     const lowercase =/[a-z]/;
 
     if(pass.length < 6) {
-      return alert("Less than 6 character")
+     toast.error("Password must be at least 6 characters");
+      return;
     }
     if(!uppercase.test(pass)){
-      return alert("Need a Uppercase")
+      toast.error("Password must contain an uppercase letter");
+      return;
     }
     if(!lowercase.test(pass)){
-      return alert("Need a Lowercse")
+      toast.error("Password must contain a lowercase letter");
+      return;
     }
 
     RegisterWithEmailPassword(email, pass)
@@ -36,31 +40,29 @@ const Register = () => {
           displayName: name, photoURL: photoUrl
         }).then(() => {
           setUser(userCredential.user)
+          toast.success("Registration successful!");
           navigate("/")
         }).catch((error) => {
-
+          toast.error("Failed to update profile");
         })
       })
       .catch(err => {
-        
-
-
+        toast.error("Registration failed");
       })
   }
-
-  console.log(user);
 
   const googleSignup = ()=>{
   handleGoogleSignin()
   .then(result=>{
     const user = result.user
-    setUser(user)
+    setUser(user);
+    toast.success("Signed up with Google!");
+    navigate("/");
   })
   .catch(err=>{
-
+     toast.error("Google sign-up failed");
   })
 }
-  
 
   return (
     <div>
